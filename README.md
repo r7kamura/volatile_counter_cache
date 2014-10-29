@@ -1,31 +1,23 @@
 # VolatileCounterCache
-
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'volatile_counter_cache'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install volatile_counter_cache
+Provides volatile counter cache logic to ActiveRecord::Base.
 
 ## Usage
+```ruby
+class Tweet < ActiveRecord::Base
+  include VolatileCounterCache
 
-TODO: Write usage instructions here
+  has_many :favorites
 
-## Contributing
+  volatile_counter_cache :favorites, cache: Rails.cache
+end
 
-1. Fork it ( https://github.com/[my-github-username]/volatile_counter_cache/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Tweet.first.favorites_count #=> 42
+Tweet.first.favorites.first.destroy
+Tweet.first.favorites_count #=> 41
+```
+
+### options
+- cache [ActiveSupport::Cache::Store] A store object to store count for each key.
+- cache_options [Hash] Options for cache store.
+- counter_method_name [String] An optional String to change counter method name.
+- foreign_key [Symbol] An optional Symbol to change method name for calculating cache key from children.

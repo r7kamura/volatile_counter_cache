@@ -20,4 +20,4 @@ Tweet.first.favorites_count #=> 41
 - cache [ActiveSupport::Cache::Store] A store object to store count for each key.
 - cache_options [Hash] Options for cache store.
 - counter_method_name [String] An optional String to change counter method name.
-- foreign_key [Symbol] An optional Symbol to change method name for calculating cache key from children.
+- foreign_key [Symbol] An optional Symbol to change cache key at callback.

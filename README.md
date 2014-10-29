@@ -8,8 +8,6 @@ Provides volatile counter cache logic to ActiveRecord::Base.
 
 ```ruby
 class Tweet < ActiveRecord::Base
-  include VolatileCounterCache
-
   has_many :favorites
 
   volatile_counter_cache :favorites, cache: Rails.cache

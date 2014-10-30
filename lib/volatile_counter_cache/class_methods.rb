@@ -28,7 +28,7 @@ module VolatileCounterCache
 
       define_method(counter_method_name) do
         cache.fetch("#{cache_key_prefix}/#{id}", cache_options) do
-          send(association_name).count
+          send(association_name).size
         end
       end
 

@@ -3,7 +3,7 @@ Provides volatile counter cache logic to ActiveRecord::Base.
 
 ## Usage
 1. `favorites_count` tries to read counter cache from Rails.cache.
-2. If there is no cache yet, it calls `favorites.count` and store the result.
+2. If there is no cache yet, it calls `favorites.size` and store the result.
 3. When `favorite` is created or destroyed, the cache is purged.
 
 ```ruby
